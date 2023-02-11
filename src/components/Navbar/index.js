@@ -27,8 +27,10 @@ export default function Navbar() {
                     <Link className="nav-link active" to="/dashboard">Dashboard</Link>
                   </li>
                   <li className="nav-item ">
-                    <button onClick={logout}>Logout</button>
-                    {/* <a className="nav-link active" type="submit"  onClick={logout}>Logout</a> */}
+                    <Link className="nav-link active" to="/about">About</Link>
+                  </li>
+                  <li className="nav-item ">
+                    <button className="btn dark btn-secondary mt-2" onClick={logout}>Logout</button>
                   </li>
                 </>
                 :
