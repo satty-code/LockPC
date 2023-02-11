@@ -8,7 +8,7 @@ export default function Navbar() {
   const logout = () => {
     localStorage.removeItem("userToken");
     localStorage.removeItem("userName");
-    nav("/login");
+     nav("/login");
   }
   return (
     <nav className="navbar navbar-expand-lg navbar-light" >
@@ -27,7 +27,8 @@ export default function Navbar() {
                     <Link className="nav-link active" to="/dashboard">Dashboard</Link>
                   </li>
                   <li className="nav-item ">
-                    <a className="nav-link active" type="submit" onClick={logout}>Logout</a>
+                    <button onClick={logout}>Logout</button>
+                    {/* <a className="nav-link active" type="submit"  onClick={logout}>Logout</a> */}
                   </li>
                 </>
                 :
