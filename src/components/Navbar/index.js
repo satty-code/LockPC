@@ -1,13 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 export default function Navbar() {
+  const nav = useNavigate();
   const logout = () => {
     localStorage.removeItem("userToken");
     localStorage.removeItem("userName");
+    nav("/login");
   }
-
   return (
     <nav className="navbar navbar-expand-lg navbar-light" >
       <div className="container-fluid">
@@ -25,7 +27,7 @@ export default function Navbar() {
                     <Link className="nav-link active" to="/dashboard">Dashboard</Link>
                   </li>
                   <li className="nav-item ">
-                    <a className="nav-link active" type="submit" href="/login" onClick={logout}>Logout</a>
+                    <a className="nav-link active" type="submit" onClick={logout}>Logout</a>
                   </li>
                 </>
                 :

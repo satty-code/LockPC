@@ -14,7 +14,7 @@ export default function Dashboard() {
           lock: 'lock'
         }
       }).then((response) => {
-        alert(response.data.detail);
+        alert("Locked", response?.data);
       });
     }
 
@@ -27,18 +27,17 @@ export default function Dashboard() {
           status: 'status'
         }
       }).then((response) => {
-        alert(response.data.detail);
+        alert(response);
       });
     }
 
   const usename = localStorage.getItem("userName")
   return (
-    <>
-      <div className='container '>
-        <div className="container text-center text-uppercase text-danger h3">
-          Welcome {usename}!<span role="img" title='Namaste' aria-label="namaste">🙏</span>
-        </div>
-        <div className="d-inline-flex p-2">
+    <div className='container '>
+      <div className="container text-center text-uppercase text-danger h3">
+        Welcome {usename}!<span role="img" title='Namaste' aria-label="namaste">🙏</span>
+      </div>
+      <div className="d-inline-flex p-2">
         <div className='container row' style={{ marginTop: "50px" }}>
           <div className='col-sm-6 text-center' >
             <div style={{ marginTop: "80px" }}>
@@ -55,7 +54,6 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
-</div>
-    </>
+    </div>
   )
 }
