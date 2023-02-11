@@ -43,7 +43,7 @@ export default function Login() {
                                     <p className="fw-bold text-dark">Please enter your username and password!</p>
 
                                     <div className="form-outline form-white">
-                                        <label className="form-label fw-bold" >Email</label>
+                                        <label className="form-label fw-bold" >Username</label>
                                         <input type="text" id="typeEmailX" placeholder='Enter Username' className="form-control form-control-lg"
                                             onChange={e => setUsername(e.target.value)} required />
                                     </div>
