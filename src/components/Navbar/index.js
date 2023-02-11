@@ -10,6 +10,7 @@ export default function Navbar() {
     localStorage.removeItem("userName");
     nav("/login");
   }
+  
   return (
     <nav className="navbar navbar-expand-lg navbar-light" >
       <div className="container-fluid">

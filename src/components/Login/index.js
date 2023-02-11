@@ -29,7 +29,7 @@ export default function Login() {
     useEffect(() => {
         let logedinUser = localStorage.getItem("userToken");
         if (logedinUser) { nav("/dashboard"); }
-    }, []);
+    }, [nav]);
 
     return (
         <section>
