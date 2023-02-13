@@ -1,15 +1,13 @@
-#from django.shortcuts import render
+# from django.shortcuts import render
 from rest_framework.generics import GenericAPIView
-from .serializer import UserSerializer, LoginSerializer
+from .serializer import UserSerializer, LoginSerializer, LockSerializer
 from rest_framework.response import Response
 from rest_framework import status
 from django.conf import settings
 from django.contrib import auth
 import jwt
-from rest_framework.views import APIView
-#from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated
-# Create your views here.
+import pyautogui
+from time import sleep
 
 
 class RegisterView(GenericAPIView):
@@ -33,12 +31,7 @@ class LoginView(GenericAPIView):
         password = data.get('password', '')
         user = auth.authenticate(username=username, password=password)
 
-        # return Response({
-        #     "message":"hii"
-        # })
-
         if user:
-
             auth_token = jwt.encode(
 
                 {'username': user.username}, 'SECRET', algorithm="HS256")
@@ -53,14 +46,14 @@ class LoginView(GenericAPIView):
         return Response({'detail': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
 
 
+# Lock pc using UI
+class LockView(GenericAPIView):
+    serializer_class = LockSerializer
 
-#from rest_framework.authentication import TokenAuthentication
+    def post(self, request):
+        data = request.data
+        lock = data.get('lock', '')
 
-
-class HelloView(APIView):
-    #authentication_classes = (TokenAuthentication)
-    permission_classes = (IsAuthenticated)
-
-    def get(self, request):
-        content = {'message': 'Hello, World!'}
-        return Response(content)
+        if lock == 'lock':
+            return Response(pyautogui.hotkey('win', 'r'), sleep(0.500),
+                            pyautogui.typewrite('Rundll32.exe user32.dll,LockWorkStation\n'))

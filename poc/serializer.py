@@ -1,44 +1,27 @@
 from rest_framework import serializers
-from .models import Customer, ComputationResource, ComputationResourceType
-#from rest_framework import serializers
+from .models import Lock
+# from rest_framework import serializers
 from django.contrib.auth.models import User
-
-
-class ComputationResourceTypeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ComputationResourceType
-        fields = '__all__'
-
-
-class ComputationResourceSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ComputationResource
-        fields = '__all__'
-
-
-class CustomerSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Customer
-        fields = '__all__'
 
 
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(
         max_length=65, min_length=8, write_only=True)
     email = serializers.EmailField(max_length=255, min_length=4),
-    #name = serializers.CharField(max_length=255, min_length=2)
-    #last_name = serializers.CharField(max_length=255, min_length=2)
+
+    # name = serializers.CharField(max_length=255, min_length=2)
+    # last_name = serializers.CharField(max_length=255, min_length=2)
 
     class Meta:
         model = User
-        fields = ['username','email', 'password'
+        fields = ['username', 'email', 'password'
                   ]
 
     def validate(self, attrs):
         email = attrs.get('email', '')
         if User.objects.filter(email=email).exists():
             raise serializers.ValidationError(
-                {'email': ('Email is already in use')})
+                {'email': 'Email is already in use'})
         return super().validate(attrs)
 
     def create(self, validated_data):
@@ -53,3 +36,11 @@ class LoginSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['username', 'password']
+
+
+class LockSerializer(serializers.ModelSerializer):
+    lock = serializers.CharField(min_length=1, )
+
+    class Meta:
+        model = Lock
+        fields = ['lock']
